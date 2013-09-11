@@ -1,4 +1,4 @@
 bin_PROGRAMS = main
-main_SOURCES = main.cpp window.cpp window.h button.cpp button.h
+main_SOURCES = main.cpp window.cpp window.h util.c util.h button.cpp button.h connection.c connection.h widget.h
 main_CXXFLAGS = $(DEPS_CFLAGS)
 main_LDFLAGS = $(DEPS_LIBS)
