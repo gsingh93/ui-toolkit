@@ -1,3 +1,7 @@
+#include "window.h"
+#include "connection.h"
+#include "util.h"
+
 #include <cassert>
 #include <iostream>
 #include <set>
@@ -7,10 +11,6 @@
 
 #include <cairo-xcb.h>
 #include <xcb/xcb.h>
-
-#include "window.h"
-#include "connection.h"
-#include "util.h"
 
 using namespace std;
 

@@ -1,10 +1,12 @@
 #include "button.h"
-#include <string>
-#include <stdlib.h>
-#include <stdio.h>
-
 #include "connection.h"
 #include "util.h"
+#include "window.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+
 #include <cairo-xcb.h>
 
 using namespace std;
@@ -30,7 +32,8 @@ xcb_visualtype_t *get_root_visual_type(xcb_screen_t *s) {
     return visual_type;
 }
 
-Button::Button(uint16_t width, uint16_t height) : Widget(width, height) {
+Button::Button(uint16_t width, uint16_t height, string label)
+    : Widget(width, height), label(move(label)) {
     con = getConnection();
 }
 
@@ -67,6 +70,11 @@ void Button::draw(uint16_t x, uint16_t y, cairo_surface_t *surface) const {
         printf("Error: %s\n", cairo_status_to_string(cairo_status(cr)));
         exit(1);
     }
+
+    cairo_set_source_rgb(cr, 0.1, 0.1, 0.1);
+    cairo_set_font_size(cr, 13);
+    cairo_move_to(cr, 40, 40);
+    cairo_show_text(cr, label.c_str());
 
     cairo_destroy(cr);
 

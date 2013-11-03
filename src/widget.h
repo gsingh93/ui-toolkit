@@ -1,9 +1,12 @@
 #ifndef _WIDGET_H_
 #define _WIDGET_H_
 
-#include <cairo-xcb.h>
 #include <stdint.h>
 #include <stdio.h>
+
+#include <cairo-xcb.h>
+
+class Window;
 
 class Widget {
 public:
