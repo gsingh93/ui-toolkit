@@ -11,7 +11,7 @@ void buttonClicked() {
 }
 
 int main() {
-    Window window(0, 0, 150, 150, 10);
+    Window window(0, 0, 150, 150, 10, "My Window");
     Button *b = new Button(100, 30);
     b->setMouseDownListener(buttonClicked);
 

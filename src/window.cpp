@@ -1,11 +1,12 @@
-#include <stdint.h>
 #include <cassert>
 #include <iostream>
 #include <set>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <stdio.h>
 
 #include <cairo-xcb.h>
+#include <xcb/xcb.h>
 
 #include "window.h"
 #include "connection.h"
@@ -14,8 +15,8 @@
 using namespace std;
 
 Window::Window(int16_t x, int16_t y, uint16_t width, uint16_t height,
-               uint16_t borderWidth) : x(x), y(y), width(width), height(height),
-               borderWidth(borderWidth), mask(0) {
+               uint16_t borderWidth, string title) : x(x), y(y), width(width),
+               height(height), borderWidth(borderWidth), mask(0), title(move(title)) {
     con = getConnection();
     assert(con != NULL);
     win = xcb_generate_id(con);
@@ -38,7 +39,8 @@ void Window::show() {
                       screen->root_visual,           /* visual              */
                       mask, values);
     delete[] values;
-
+    xcb_change_property(con, XCB_PROP_MODE_REPLACE, win, XCB_ATOM_WM_NAME,
+                        XCB_ATOM_STRING, 8, title.length(), title.c_str());
     xcb_map_window(con, win);
     xcb_flush(con);
 

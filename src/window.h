@@ -1,9 +1,10 @@
 #ifndef _WINDOW_H_
 #define _WINDOW_H_
 
-#include <stdint.h>
-#include <set>
 #include <list>
+#include <set>
+#include <stdint.h>
+#include <string>
 
 #include <xcb/xcb.h>
 
@@ -27,7 +28,7 @@ public:
     friend Button;
 
     Window(int16_t x, int16_t y, uint16_t width, uint16_t height,
-           uint16_t borderWidth);
+           uint16_t borderWidth, string title);
     ~Window();
 
     void show();
@@ -43,6 +44,7 @@ private:
 
     int16_t x, y;
     uint16_t width, height, borderWidth;
+    string title;
 
     set<xcb_cw_t> properties;
     list<ChildElement*> children;
